@@ -1,0 +1,762 @@
+
+/* =========================================
+   ASTRALIA - PAGINA PRINCIPAL
+========================================= */
+
+.astralia-home {
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 45%,
+      #211b43 0%,
+      #111027 40%,
+      #090817 85%
+    );
+
+  color: #f5efff;
+  font-family: system-ui, sans-serif;
+}
+
+/* =========================================
+   FONDO ESTELAR
+========================================= */
+
+.starfield {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.stars {
+  position: absolute;
+  inset: -100%;
+  background-repeat: repeat;
+}
+
+.stars-small {
+  background-image:
+    radial-gradient(1px 1px at 40px 60px, white 99%, transparent),
+    radial-gradient(1px 1px at 120px 180px, white 99%, transparent),
+    radial-gradient(1px 1px at 220px 90px, white 99%, transparent),
+    radial-gradient(1px 1px at 300px 250px, white 99%, transparent);
+
+  background-size: 350px 300px;
+
+  animation:
+    starMove 100s linear infinite,
+    twinkle 4s ease-in-out infinite alternate;
+}
+
+.stars-medium {
+  background-image:
+    radial-gradient(2px 2px at 100px 100px, #c8b8ff 99%, transparent),
+    radial-gradient(2px 2px at 250px 200px, #ffffff 99%, transparent),
+    radial-gradient(2px 2px at 350px 50px, #e8c9ff 99%, transparent);
+
+  background-size: 450px 350px;
+
+  animation:
+    starMove 150s linear infinite reverse,
+    twinkle 5s ease-in-out infinite alternate;
+}
+
+.stars-large {
+  background-image:
+    radial-gradient(3px 3px at 150px 150px, #f5d99b 99%, transparent),
+    radial-gradient(2px 2px at 350px 300px, #ffffff 99%, transparent);
+
+  background-size: 550px 450px;
+
+  animation: twinkle 3s ease-in-out infinite alternate;
+}
+
+@keyframes starMove {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(350px);
+  }
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0.35;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* =========================================
+   ESTRELLAS FUGACES
+========================================= */
+
+.shooting-star {
+  position: absolute;
+  width: 120px;
+  height: 2px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #fff,
+    transparent
+  );
+
+  top: 15%;
+  left: -150px;
+
+  transform: rotate(-35deg);
+
+  animation: shooting 9s linear infinite;
+}
+
+.shooting-star.second {
+  top: 65%;
+  animation-delay: 5s;
+  animation-duration: 12s;
+}
+
+@keyframes shooting {
+  0% {
+    transform: translate(0, 0) rotate(-35deg);
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  15% {
+    transform: translate(120vw, 50vh) rotate(-35deg);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* =========================================
+   ENCABEZADO
+========================================= */
+
+.astro-header {
+  position: relative;
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 25px 7%;
+}
+
+.astro-header .brand {
+  color: #f5d99b;
+  text-decoration: none;
+
+  font-size: 23px;
+  letter-spacing: 0.3em;
+  font-weight: 500;
+}
+
+.astro-header .brand small {
+  display: block;
+
+  font-size: 9px;
+  letter-spacing: 0.4em;
+
+  color: #b7a9cc;
+  margin-top: 5px;
+}
+
+.header-symbol {
+  font-size: 35px;
+  color: #f5d99b;
+
+  animation: rotateStar 15s linear infinite;
+}
+
+@keyframes rotateStar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================
+   CONTENIDO PRINCIPAL
+========================================= */
+
+.astro-main {
+  position: relative;
+  z-index: 2;
+
+  max-width: 1200px;
+  margin: auto;
+
+  padding: 30px 20px;
+}
+
+.hero {
+  text-align: center;
+}
+
+.eyebrow {
+  color: #e4c98e;
+
+  font-size: 11px;
+  letter-spacing: 0.35em;
+
+  margin-bottom: 20px;
+}
+
+/* =========================================
+   TITULO PRINCIPAL
+========================================= */
+
+.main-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+  margin: 35px auto 20px;
+
+  text-align: center;
+}
+
+.title-small {
+  font-family: system-ui, sans-serif;
+
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.55em;
+
+  color: #d6c3ee;
+
+  animation: fadeIn 1.5s ease both;
+}
+
+.title-brand {
+  font-family: Georgia, serif;
+
+  font-size: clamp(4rem, 11vw, 8rem);
+  font-weight: normal;
+
+  letter-spacing: 0.16em;
+  line-height: 1.1;
+  padding-left: 0.16em;
+
+  background: linear-gradient(
+    120deg,
+    #fff4d7,
+    #e5c58a,
+    #c8a5ff,
+    #fff4d7
+  );
+
+  background-size: 200% auto;
+
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+
+  filter: drop-shadow(0 0 15px #c5a1ff55);
+
+  animation:
+    titleAppear 1.8s ease both,
+    titleShine 7s linear infinite;
+}
+
+.title-subtitle {
+  font-family: Georgia, serif;
+  font-style: italic;
+
+  font-size: clamp(16px, 2.5vw, 23px);
+  font-weight: normal;
+
+  letter-spacing: 0.08em;
+  color: #e5c58a;
+
+  animation: fadeIn 2s ease both;
+}
+
+@keyframes titleAppear {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+    filter: blur(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: drop-shadow(0 0 15px #c5a1ff55);
+  }
+}
+
+@keyframes titleShine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.hero-description {
+  max-width: 530px;
+
+  margin: 22px auto 35px;
+
+  color: #b9b2cb;
+
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* =========================================
+   INDICADOR DE NAVEGACION
+========================================= */
+
+.universe-label {
+  color: #d6c9eb;
+
+  font-size: 10px;
+  letter-spacing: 0.3em;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 15px;
+}
+
+.universe-label span {
+  width: 35px;
+  height: 1px;
+
+  background: #bda16c;
+}
+
+/* =========================================
+   SISTEMA ESTELAR
+========================================= */
+
+.stellar-system {
+  position: relative;
+
+  width: min(600px, 100%);
+  height: 450px;
+
+  margin: 15px auto 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ORBITAS */
+
+.orbit {
+  position: absolute;
+
+  border: 1px solid rgba(221, 198, 255, 0.12);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.orbit-one {
+  width: 320px;
+  height: 320px;
+
+  animation: orbitPulse 6s ease-in-out infinite alternate;
+}
+
+.orbit-two {
+  width: 460px;
+  height: 460px;
+
+  border-style: dashed;
+
+  animation: orbitRotate 50s linear infinite;
+}
+
+@keyframes orbitPulse {
+  from {
+    transform: scale(0.95);
+    opacity: 0.3;
+  }
+
+  to {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+@keyframes orbitRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* LINEAS DE CONSTELACION */
+
+.constellation-lines {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: visible;
+  pointer-events: none;
+}
+
+.constellation-lines path {
+  fill: none;
+
+  stroke: rgba(229, 201, 145, 0.35);
+  stroke-width: 1;
+
+  stroke-dasharray: 5 7;
+}
+
+/* =========================================
+   ESTRELLA CENTRAL
+========================================= */
+
+.central-star {
+  position: relative;
+  z-index: 2;
+
+  width: 145px;
+  height: 145px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(239, 207, 155, 0.5);
+
+  background: radial-gradient(
+    circle,
+    #493965 0%,
+    #211a39 65%,
+    #151027 100%
+  );
+
+  box-shadow:
+    0 0 30px #c8a5ff35,
+    0 0 80px #c8a5ff20,
+    inset 0 0 25px #e8d2ff20;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  animation: floating 5s ease-in-out infinite;
+}
+
+.central-icon {
+  color: #f5d99b;
+
+  font-size: 42px;
+  line-height: 1.2;
+
+  text-shadow: 0 0 20px #f5d99b;
+}
+
+.central-star span {
+  font-size: 13px;
+  letter-spacing: 0.25em;
+
+  color: #f5d99b;
+  margin-top: 5px;
+}
+
+.central-star small {
+  font-size: 8px;
+  letter-spacing: 0.2em;
+
+  color: #c9bddb;
+  margin-top: 7px;
+}
+
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* =========================================
+   ESTRELLAS INTERACTIVAS
+========================================= */
+
+.stellar-point {
+  position: absolute;
+  z-index: 4;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 8px;
+
+  text-decoration: none;
+  color: #f2eaff;
+
+  transition:
+    transform 0.35s ease,
+    color 0.35s ease;
+}
+
+.point-icon {
+  width: 64px;
+  height: 64px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(230, 206, 255, 0.45);
+  border-radius: 50%;
+
+  background: rgba(31, 23, 56, 0.85);
+
+  color: #f4d89e;
+  font-size: 27px;
+
+  box-shadow:
+    0 0 15px #c6a3ff30,
+    inset 0 0 15px #c6a3ff15;
+
+  transition: all 0.35s ease;
+}
+
+.point-name {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+
+  text-shadow: 0 0 12px #c5a1ff;
+}
+
+/* EFECTO HOVER */
+
+.stellar-point:hover {
+  color: #f5d99b;
+}
+
+.stellar-point:hover .point-icon {
+  background: #e5c58a;
+  color: #21182a;
+
+  box-shadow:
+    0 0 20px #f5d99b,
+    0 0 50px #f5d99b80;
+}
+
+/* POSICIONES */
+
+.point-horoscope {
+  top: 50%;
+  right: 0;
+
+  transform: translateY(-50%);
+}
+
+.point-horoscope:hover {
+  transform: translateY(-50%) scale(1.15);
+}
+
+.point-tarot {
+  bottom: 2%;
+  left: 50%;
+
+  transform: translateX(-50%);
+}
+
+.point-tarot:hover {
+  transform: translateX(-50%) scale(1.15);
+}
+
+.point-store {
+  top: 50%;
+  left: 0;
+
+  transform: translateY(-50%);
+}
+
+.point-store:hover {
+  transform: translateY(-50%) scale(1.15);
+}
+
+/* =========================================
+   MENSAJE INFERIOR
+========================================= */
+
+.bottom-message {
+  color: #a99bbd;
+
+  font-size: 9px;
+  letter-spacing: 0.25em;
+
+  margin-top: 0;
+
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.bottom-message span {
+  color: #e5c58a;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.astro-footer {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  justify-content: center;
+
+  gap: 18px;
+  padding: 25px 10px;
+
+  border-top: 1px solid #ffffff12;
+
+  color: #a99bbd;
+
+  font-size: 10px;
+  letter-spacing: 0.2em;
+}
+
+.astro-footer span:first-child,
+.astro-footer span:last-child {
+  color: #e5c58a;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .astro-header {
+    padding: 20px;
+  }
+
+  .astro-main {
+    padding-top: 35px;
+  }
+
+  .main-title {
+    margin-top: 25px;
+    gap: 15px;
+  }
+
+  .title-small {
+    font-size: 9px;
+  }
+
+  .title-brand {
+    font-size: clamp(2.8rem, 12vw, 4.5rem);
+    letter-spacing: 0.10em;
+    padding-left: 0.10em;
+  }
+
+  .hero-description {
+    font-size: 13px;
+    padding: 0 12px;
+  }
+
+  .stellar-system {
+    height: 370px;
+    max-width: 400px;
+  }
+
+  .orbit-one {
+    width: 240px;
+    height: 240px;
+  }
+
+  .orbit-two {
+    width: 330px;
+    height: 330px;
+  }
+
+  .central-star {
+    width: 115px;
+    height: 115px;
+  }
+
+  .central-icon {
+    font-size: 32px;
+  }
+
+  .central-star span {
+    font-size: 10px;
+  }
+
+  .central-star small {
+    font-size: 7px;
+  }
+
+  .point-icon {
+    width: 49px;
+    height: 49px;
+    font-size: 21px;
+  }
+
+  .point-name {
+    font-size: 10px;
+  }
+
+  .astro-footer {
+    font-size: 8px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .bottom-message {
+    font-size: 8px;
+  }
+}
+
+/* =========================================
+   ACCESIBILIDAD
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .astralia-home *,
+  .astralia-home *::before,
+  .astralia-home *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+}

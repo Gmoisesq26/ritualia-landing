@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arcana Tarot | Juego de Cartas</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/tarot.css">
+</head>
+<body>
+  <header>
+    <a href="../index.html" class="brand">ARCANA<small>UN JUEGO DE SÍMBOLOS</small></a>
+    <nav>
+      <a href="../index.html">Inicio</a>
+      <a href="../horoscopo/index.html">Horóscopo</a>
+      <a href="index.html" class="active">Sacar cartas</a>
+      <a href="../tienda/index.html">Tienda</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="intro">
+      <div class="eyebrow">✦ Lectura de 3 Cartas ✦</div>
+      <h1>Tu Tirada Arcana</h1>
+      <p style="color: var(--suave);">Revela tres arcanos ilustrados: tu origen, el camino y el consejo de la aventura. Es un juego creativo, no una predicción del futuro.</p>
+    </div>
+
+    <div class="spread-controls">
+      <button class="primary" id="drawBtn">✦ Sacar tres cartas</button>
+      <button id="resetBtn">Limpiar mesa</button>
+    </div>
+
+    <div class="spread" id="spread"></div>
+    <p class="muted game-message" id="gameMessage" aria-live="polite">Pulsa “Sacar tres cartas” para comenzar.</p>
+  </main>
+
+  <footer>ARCANA · Un juego de imaginación y símbolos</footer>
+  <script src="../js/comun.js"></script>
+  <script src="../js/datos.js"></script>
+  <script src="../js/tarot.js"></script>
+</body>
+</html>

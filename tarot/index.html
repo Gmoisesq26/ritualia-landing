@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astralia Tarot | Tirada de tres cartas</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,400&display=swap">
+  <link rel="stylesheet" href="../css/tarot.css">
+  <link rel="stylesheet" href="../css/estelar.css">
+  <style>
+    /* Efecto arcano de pantalla completa (lo controla tarot.js al sacar las cartas) */
+    .arcane-stage{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;pointer-events:none;background:radial-gradient(circle at center,rgba(30,17,57,.45),rgba(4,5,17,.88) 58%,rgba(2,3,10,.96));opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s}
+    .arcane-stage.active{opacity:1;visibility:visible}
+    .arcane-core{position:relative;width:min(76vw,560px);aspect-ratio:1;display:grid;place-items:center;filter:drop-shadow(0 0 22px rgba(255,158,49,.5))}
+    .arcane-ring{position:absolute;inset:8%;border:2px solid rgba(255,177,77,.88);border-radius:50%;box-shadow:0 0 12px #ff9d35,inset 0 0 18px rgba(255,137,33,.3);animation:arcaneSpin 5s linear infinite}
+    .arcane-ring:before,.arcane-ring:after{content:"✧ ᚱ ✦ ᚨ ✧ ᚲ ✦ ᚨ ✧ ᚾ ✦";position:absolute;inset:-13px;border:1px dashed rgba(255,214,139,.9);border-radius:50%;display:grid;place-items:start center;padding-top:0;color:#ffd28a;letter-spacing:.5em;font-size:clamp(12px,2vw,20px);text-shadow:0 0 10px #ff8b2c}
+    .arcane-ring:after{inset:12%;transform:rotate(15deg);border:2px dotted rgba(255,119,39,.9);content:""}
+    .arcane-ring.r2{inset:20%;border-color:rgba(109,205,255,.85);box-shadow:0 0 17px rgba(79,174,255,.8),inset 0 0 20px rgba(79,174,255,.2);animation:arcaneSpin 3.2s linear infinite reverse}
+    .arcane-ring.r3{inset:31%;border-style:dashed;border-color:#ffe2a0;animation:arcaneSpin 8s linear infinite}
+    .arcane-sigil{font-size:clamp(60px,13vw,120px);color:#ffe7b1;text-shadow:0 0 12px #ff9e32,0 0 38px #ff6b22,0 0 70px #b84bff;animation:sigilPulse .9s ease-in-out infinite alternate}
+    .arcane-label{position:absolute;bottom:12%;color:#ffe0a5;text-transform:uppercase;letter-spacing:.32em;font:600 clamp(10px,1.5vw,14px) system-ui,sans-serif;text-align:center;text-shadow:0 0 12px #ff8d2c;animation:labelPulse 1s ease-in-out infinite alternate}
+    .arcane-particle{position:absolute;left:50%;top:50%;width:5px;height:5px;border-radius:50%;background:#ffe5a1;box-shadow:0 0 8px 3px #ff9b35;animation:particleFly 1.25s ease-out forwards;--dx:0px;--dy:-100px}
+    @keyframes arcaneSpin{to{transform:rotate(360deg)}}
+    @keyframes sigilPulse{from{transform:scale(.9) rotate(-8deg);opacity:.75}to{transform:scale(1.08) rotate(8deg);opacity:1}}
+    @keyframes labelPulse{from{opacity:.55;letter-spacing:.22em}to{opacity:1;letter-spacing:.34em}}
+    @keyframes particleFly{0%{transform:translate(-50%,-50%) scale(.3);opacity:0}15%{opacity:1}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(0);opacity:0}}
+    @media(prefers-reduced-motion:reduce){.arcane-ring,.arcane-sigil,.arcane-label,.arcane-particle{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body class="estelar">
+  <div class="cielo" aria-hidden="true">
+    <div class="nebulosa n1"></div><div class="nebulosa n2"></div><div class="nebulosa n3"></div>
+    <div class="estrellas e1"></div><div class="estrellas e2"></div><div class="estrellas e3"></div>
+    <div class="fugaz" style="--x:8%;--y:6%;--d:0s"></div>
+    <div class="fugaz" style="--x:42%;--y:3%;--d:3.5s"></div>
+    <div class="fugaz" style="--x:25%;--y:22%;--d:6.5s"></div>
+  </div>
+  <header>
+    <a href="../index.html" class="brand">ASTRALIA<small>UN JUEGO DE SÍMBOLOS</small></a>
+    <nav>
+      <a href="../index.html">Inicio</a>
+      <a href="../horoscopo/index.html">Horóscopo</a>
+      <a href="index.html" class="active">Sacar cartas</a>
+      <a href="../tienda/index.html">Tienda</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="intro">
+      <div class="astrolabio" aria-hidden="true"><div class="anillo"><i style="--i:0">&#9800;&#xFE0E;</i><i style="--i:1">&#9801;&#xFE0E;</i><i style="--i:2">&#9802;&#xFE0E;</i><i style="--i:3">&#9803;&#xFE0E;</i><i style="--i:4">&#9804;&#xFE0E;</i><i style="--i:5">&#9805;&#xFE0E;</i><i style="--i:6">&#9806;&#xFE0E;</i><i style="--i:7">&#9807;&#xFE0E;</i><i style="--i:8">&#9808;&#xFE0E;</i><i style="--i:9">&#9809;&#xFE0E;</i><i style="--i:10">&#9810;&#xFE0E;</i><i style="--i:11">&#9811;&#xFE0E;</i></div><div class="anillo interno"></div></div>
+      <div class="eyebrow">✦ Lectura de 3 Cartas ✦</div>
+      <h1>Tu Tirada Arcana</h1>
+      <p style="color: var(--suave);">Escribe tu pregunta y revela tres arcanos ilustrados: tu origen, el camino y el consejo de la aventura. Después, el vidente leerá las tres cartas juntas. Es un juego creativo, no una predicción del futuro.</p>
+    </div>
+
+    <div class="pregunta-box">
+      <label for="pregunta">¿Qué quieres preguntarle a las cartas?</label>
+      <input id="pregunta" type="text" maxlength="200" autocomplete="off"
+             enterkeyhint="go"
+             placeholder="Ej: ¿Qué debo saber sobre este nuevo proyecto?">
+      <p class="pista">Pulsa Enter para barajar y sacar tus tres cartas</p>
+    </div>
+
+    <div class="spread" id="spread"></div>
+    <p class="muted game-message" id="gameMessage" aria-live="polite">Escribe tu pregunta y pulsa Enter para barajar.</p>
+
+    <section class="vidente" id="vidente" hidden aria-live="polite"></section>
+  </main>
+
+  <div class="arcane-stage" id="arcaneStage" aria-hidden="true">
+    <div class="arcane-core">
+      <div class="arcane-ring"></div><div class="arcane-ring r2"></div><div class="arcane-ring r3"></div>
+      <div class="arcane-sigil">✧</div><div class="arcane-label" id="arcaneLabel">Canalizando energía arcana</div>
+    </div>
+  </div>
+
+  <footer>ASTRALIA · Un juego de imaginación y símbolos</footer>
+  <script src="../js/comun.js"></script>
+  <script src="../js/datos.js"></script>
+  <script src="../js/tarot.js"></script>
+</body>
+</html>

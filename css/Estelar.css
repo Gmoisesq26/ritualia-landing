@@ -1,0 +1,220 @@
+/* ===== ASTRALIA · tema estelar =====
+   Cárgalo DESPUÉS de base.css y tarot.css. Todo va bajo body.estelar. */
+
+:root {
+  --noche: #05030f;
+  --medianoche: #0b0a24;
+  --violeta: #2a1a5e;
+  --dorado: #f1d58a;
+  --cian: #8fd3ff;
+  --suave: #b9b3d6;
+  --panel: rgba(18, 14, 44, 0.62);
+  --fuente-titulo: 'Cormorant Garamond', 'Palatino Linotype', Georgia, serif;
+}
+
+body.estelar {
+  min-height: 100vh;
+  color: #efeaff;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: radial-gradient(ellipse at 50% -10%, #231552 0%, var(--medianoche) 45%, var(--noche) 100%) fixed;
+}
+
+/* ---------- Cielo: estrellas, nebulosas y fugaces ---------- */
+.cielo { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+
+.estrellas {
+  position: absolute; inset: 0;
+  background-repeat: repeat;
+  background-size: var(--t) var(--t);
+  animation: titilar var(--tit, 4s) ease-in-out infinite alternate, deriva var(--der, 160s) linear infinite;
+}
+.e1 { --t: 260px; --tit: 4s; --der: 200s;
+  background-image:
+    radial-gradient(1px 1px at 12px 40px, #fff, transparent),
+    radial-gradient(1px 1px at 90px 120px, #cfe8ff, transparent),
+    radial-gradient(1.4px 1.4px at 170px 60px, #fff, transparent),
+    radial-gradient(1px 1px at 230px 190px, #ffe7b1, transparent),
+    radial-gradient(1px 1px at 60px 220px, #fff, transparent); }
+.e2 { --t: 430px; --tit: 6s; --der: 150s; animation-delay: -2s, 0s;
+  background-image:
+    radial-gradient(1.5px 1.5px at 40px 90px, #fff, transparent),
+    radial-gradient(1px 1px at 210px 300px, #cfe8ff, transparent),
+    radial-gradient(1.5px 1.5px at 340px 140px, #ffe7b1, transparent),
+    radial-gradient(1px 1px at 380px 380px, #fff, transparent); }
+.e3 { --t: 640px; --tit: 9s; --der: 110s; animation-delay: -4s, 0s;
+  background-image:
+    radial-gradient(2px 2px at 120px 160px, #fff, rgba(143, 211, 255, 0.4) 60%, transparent),
+    radial-gradient(2.2px 2.2px at 470px 420px, #ffe7b1, rgba(241, 213, 138, 0.4) 60%, transparent),
+    radial-gradient(2px 2px at 560px 90px, #fff, rgba(190, 160, 255, 0.4) 60%, transparent); }
+
+.nebulosa {
+  position: absolute; width: 70vmax; height: 70vmax; border-radius: 50%;
+  filter: blur(70px); opacity: 0.5;
+  animation: flotar 45s ease-in-out infinite alternate;
+}
+.n1 { top: -25vmax; left: -20vmax; background: radial-gradient(circle, rgba(120, 70, 255, 0.55), transparent 65%); }
+.n2 { bottom: -30vmax; right: -20vmax; background: radial-gradient(circle, rgba(60, 140, 255, 0.4), transparent 65%); animation-delay: -15s; }
+.n3 { top: 30vh; left: 35vw; width: 45vmax; height: 45vmax; background: radial-gradient(circle, rgba(200, 80, 200, 0.25), transparent 65%); animation-delay: -30s; }
+
+.fugaz {
+  position: absolute; top: var(--y); left: var(--x);
+  width: 140px; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #fff);
+  box-shadow: 0 0 8px 1px rgba(255, 255, 255, 0.5);
+  opacity: 0; transform: rotate(32deg);
+  animation: fugaz 9s ease-in infinite; animation-delay: var(--d);
+}
+
+@keyframes titilar { from { opacity: 0.45; } to { opacity: 1; } }
+@keyframes deriva { to { background-position: calc(var(--t) * -1) var(--t); } }
+@keyframes flotar { to { transform: translate(6vmax, 5vmax) scale(1.15); } }
+@keyframes fugaz {
+  0% { opacity: 0; transform: translate(0, 0) rotate(32deg); }
+  2% { opacity: 1; }
+  9% { opacity: 0; transform: translate(440px, 275px) rotate(32deg); }
+  100% { opacity: 0; transform: translate(440px, 275px) rotate(32deg); }
+}
+
+/* ---------- Estructura sobre el cielo ---------- */
+body.estelar header,
+body.estelar main,
+body.estelar footer { position: relative; z-index: 1; }
+
+body.estelar header {
+  position: sticky; top: 0; z-index: 5;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 20px;
+  padding: 14px clamp(16px, 4vw, 40px);
+  background: linear-gradient(rgba(5, 3, 15, 0.88), rgba(5, 3, 15, 0.4));
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(241, 213, 138, 0.16);
+}
+body.estelar .brand {
+  font-family: var(--fuente-titulo); font-size: 1.7rem; font-weight: 500; letter-spacing: 0.16em;
+  color: var(--dorado); text-decoration: none; text-shadow: 0 0 18px rgba(241, 213, 138, 0.45);
+}
+body.estelar .brand small { display: block; font: 400 0.62rem system-ui, sans-serif; letter-spacing: 0.28em; color: var(--suave); text-shadow: none; }
+body.estelar nav { display: flex; gap: 6px; flex-wrap: wrap; }
+body.estelar nav a {
+  position: relative; padding: 8px 14px; color: var(--suave); text-decoration: none; transition: color 0.25s;
+}
+body.estelar nav a::after {
+  content: ""; position: absolute; left: 14px; right: 14px; bottom: 2px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+  transform: scaleX(0); transition: transform 0.3s;
+}
+body.estelar nav a:hover, body.estelar nav a.active { color: #fff; }
+body.estelar nav a:hover::after, body.estelar nav a.active::after { transform: scaleX(1); }
+
+/* ---------- Hero: astrolabio zodiacal ---------- */
+body.estelar .intro {
+  position: relative; z-index: 1; isolation: isolate;
+  max-width: 680px; margin: 0 auto; padding: 110px 16px 120px;
+  animation: aparecer 1.6s ease-out both;
+}
+body.estelar .intro p { max-width: 54ch; margin-inline: auto; line-height: 1.65; }
+body.estelar .eyebrow {
+  font-family: var(--fuente-titulo); font-style: italic; font-size: 1.2rem;
+  text-transform: none; letter-spacing: 0.08em; color: var(--dorado);
+}
+body.estelar .intro h1 {
+  margin: 6px 0 14px;
+  font-family: var(--fuente-titulo); font-weight: 300; font-size: clamp(2.6rem, 8vw, 4.8rem);
+  line-height: 1.05; letter-spacing: 0.02em;
+  background: linear-gradient(100deg, #fff 18%, var(--dorado) 42%, #fff 50%, var(--cian) 68%, #fff 88%);
+  background-size: 260% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: brillo 10s ease-in-out infinite;
+}
+
+.astrolabio {
+  --r: min(42vw, 230px);
+  position: absolute; z-index: -1; left: 50%; top: 50%;
+  width: calc(var(--r) * 2); aspect-ratio: 1; translate: -50% -50%;
+}
+.anillo {
+  position: absolute; inset: 0; border-radius: 50%;
+  border: 1px solid rgba(241, 213, 138, 0.3);
+  box-shadow: 0 0 40px rgba(130, 90, 255, 0.18), inset 0 0 40px rgba(130, 90, 255, 0.12);
+  animation: girar 140s linear infinite;
+}
+.anillo.interno { inset: 13%; border: 1px dashed rgba(143, 211, 255, 0.28); box-shadow: none; animation-duration: 90s; animation-direction: reverse; }
+.anillo i {
+  position: absolute; left: 50%; top: 50%;
+  font-style: normal; font-size: 1.15rem; line-height: 1; color: var(--dorado); opacity: 0.7;
+  transform: translate(-50%, -50%) rotate(calc(var(--i) * 30deg)) translateY(calc(var(--r) * -1));
+  text-shadow: 0 0 10px rgba(241, 213, 138, 0.6);
+}
+
+@keyframes girar { to { transform: rotate(360deg); } }
+@keyframes brillo { 0%, 100% { background-position: 100% 0; } 50% { background-position: 0 0; } }
+@keyframes aparecer { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- Botones ---------- */
+body.estelar .spread-controls { position: relative; z-index: 1; margin-top: -40px; }
+body.estelar button {
+  font: inherit; cursor: pointer; padding: 12px 28px; border-radius: 999px;
+  color: #f6efd8; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(6px);
+  border: 1px solid rgba(241, 213, 138, 0.35);
+  transition: transform 0.2s, box-shadow 0.3s, border-color 0.3s;
+}
+body.estelar button:hover:not(:disabled) {
+  transform: translateY(-2px); border-color: var(--dorado); box-shadow: 0 0 24px rgba(241, 213, 138, 0.25);
+}
+body.estelar button:focus-visible { outline: 2px solid var(--cian); outline-offset: 3px; }
+body.estelar button:disabled { opacity: 0.55; cursor: not-allowed; }
+body.estelar button.primary {
+  position: relative; overflow: hidden; font-weight: 600; color: #1a1033; border-color: transparent;
+  background: linear-gradient(120deg, #f1d58a, #c9a24d 55%, #f7e6b4);
+  box-shadow: 0 0 28px rgba(241, 213, 138, 0.35);
+}
+body.estelar button.primary::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.65) 50%, transparent 65%);
+  transform: translateX(-120%); animation: destello 4.5s ease-in-out infinite;
+}
+body.estelar button.primary:disabled::after { animation: none; }
+@keyframes destello { 0%, 60% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
+
+/* ---------- Mesa de cartas ---------- */
+body.estelar .spread { isolation: isolate; margin-top: 30px; }
+body.estelar .spread::before {
+  content: ""; position: absolute; z-index: -1; left: 50%; top: 52%;
+  width: min(92%, 780px); height: 230px; translate: -50% -50%;
+  background: radial-gradient(ellipse, rgba(130, 90, 255, 0.3), transparent 70%);
+  filter: blur(28px); pointer-events: none;
+}
+body.estelar .card-name { font-family: var(--fuente-titulo); font-size: 19px; font-weight: 600; line-height: 1.1; }
+body.estelar .position {
+  font-family: var(--fuente-titulo); font-style: italic; font-size: 1.05rem;
+  text-transform: none; letter-spacing: 0.06em;
+}
+body.estelar .reading {
+  padding: 10px 14px; border-radius: 12px;
+  background: var(--panel); border: 1px solid rgba(241, 213, 138, 0.22); backdrop-filter: blur(6px);
+}
+body.estelar .reading:empty { display: none; }
+body.estelar .game-message {
+  font-family: var(--fuente-titulo); font-style: italic; font-size: 1.15rem; color: var(--suave);
+}
+
+/* Las cartas reveladas flotan suavemente */
+body.estelar .drawn-card:has(.card-holder[data-revealed]) { animation: flotarCarta 6s ease-in-out infinite; }
+body.estelar .drawn-card:nth-child(2):has(.card-holder[data-revealed]) { animation-delay: -2s; }
+body.estelar .drawn-card:nth-child(3):has(.card-holder[data-revealed]) { animation-delay: -4s; }
+@keyframes flotarCarta { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+
+body.estelar footer {
+  margin-top: 60px; padding: 28px 16px; text-align: center; color: var(--suave); font-size: 0.85rem;
+  border-top: 1px solid rgba(241, 213, 138, 0.14);
+}
+
+@media (max-width: 760px) {
+  body.estelar .intro { padding: 90px 16px 100px; }
+  body.estelar .anillo i { font-size: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .estrellas, .nebulosa, .anillo, body.estelar .intro, body.estelar .intro h1,
+  body.estelar button.primary::after, body.estelar .drawn-card { animation: none !important; }
+  .fugaz { display: none; }
+}

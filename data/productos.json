@@ -1,0 +1,18 @@
+[
+  {
+    "id": "mazo-arcana-fisico",
+    "nombre": "Mazo Físico Arcana Tarot (Edición Ilustrada)",
+    "precio": 32.00,
+    "descripcion": "Mazo impreso de 78 cartas de alta gramaje con laminado mate y bordes dorados.",
+    "imagen": "img/productos/mazo-fisico.webp",
+    "enlace_pago": "https://tienda.arcana.com/checkout/mazo"
+  },
+  {
+    "id": "tapete-terciopelo",
+    "nombre": "Tapete Místico de Terciopelo",
+    "precio": 18.50,
+    "descripcion": "Superficie de lectura antideslizante con bordados dorados del zodiaco.",
+    "imagen": "img/productos/tapete.webp",
+    "enlace_pago": "https://tienda.arcana.com/checkout/tapete"
+  }
+]
