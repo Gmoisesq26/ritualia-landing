@@ -161,20 +161,24 @@ async function consultarVidente(pregunta, elegidas, mi) {
       <span class="puntos">El vidente consulta las cartas<i>.</i><i>.</i><i>.</i></span></div>`;
   box.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'nearest' });
 
+  const posiciones = ['origen', 'camino', 'consejo'];
   let texto;
   try {
     const r = await fetch('/api/lectura', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ pregunta, cartas: elegidas.map(c => c.id) })
+      signal: AbortSignal.timeout(45000), // si el servidor no responde, no deja los puntos para siempre
+      body: JSON.stringify({
+        pregunta,
+        // Nombre + posición, para que la lectura respete origen / camino / consejo
+        cartas: elegidas.map((c, i) => `${c.nombre} (${posiciones[i]})`)
+      })
     });
-    if (r.status === 429) {
-      texto = 'Hay muchas consultas en este momento. Espera un minuto e inténtalo de nuevo.';
-    } else if (!r.ok) {
-      throw new Error(r.status);
-    } else {
-      texto = (await r.json()).lectura;
-    }
+    const datos = await r.json().catch(() => ({}));
+    console.log('Respuesta del vidente:', r.status, datos); // para depurar
+    // Si el servidor manda un mensaje (esperar, mucha demanda...), se muestra tal cual
+    texto = r.ok ? datos.texto : (datos.error || 'La niebla cubre las cartas por ahora. Inténtalo de nuevo en un momento.');
+    if (!texto) throw new Error('Respuesta vacía');
   } catch (e) {
     console.error('Error al consultar al vidente:', e);
     texto = 'La niebla cubre las cartas por ahora. Inténtalo de nuevo en un momento.';

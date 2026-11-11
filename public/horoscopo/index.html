@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ritualia · Horóscopo de la semana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,700&family=Outfit:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../css/horoscopo.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1b8"/><stop offset=".45" stop-color="#d9a441"/><stop offset="1" stop-color="#7a4a0b"/></linearGradient><linearGradient id="bronze" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b9842a"/><stop offset="1" stop-color="#3d2406"/></linearGradient><symbol id="tmp" viewBox="0 0 120 100"><path d="M6 38L60 10L114 38Z M8 40H112V47H8Z M12 49h7v32h-7z M31 49h7v32h-7z M50 49h7v32h-7z M69 49h7v32h-7z M88 49h7v32h-7z M107 49h7v32h-7z M6 83H114V89H6Z M2 89H118V95H2Z"/></symbol></defs></svg>
+<div id="stars"></div>
+<nav class="nav" aria-label="Principal"><div class="nav-in">
+  <a class="nb" href="#top" aria-label="Ritualia, inicio"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="rlg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8b6cf0"/><stop offset=".55" stop-color="#d9a8c9"/><stop offset="1" stop-color="#e8b43a"/></linearGradient><mask id="rlm"><rect width="48" height="48" fill="#fff"/><circle cx="29" cy="20" r="10.5" fill="#000"/></mask></defs><circle cx="24" cy="24" r="24" fill="url(#rlg)"/><circle cx="21.5" cy="25" r="13" fill="#120c2b" mask="url(#rlm)"/><path transform="translate(28.5,20.5)" fill="#120c2b" d="M0,-5.2 L1.29,-1.78 L4.95,-1.61 L2.09,0.68 L3.06,4.21 L0,2.2 L-3.06,4.21 L-2.09,0.68 L-4.95,-1.61 L-1.29,-1.78Z"/></svg><span><b>RITUALIA</b><small>Universo &amp; destino</small></span></a>
+  <div class="nav-links"><a href="#top" aria-current="page">Horóscopo</a></div><span></span>
+</div></nav>
+<header id="top">
+  <div class="hero">
+    <div class="pill"><span class="week" id="week"></span></div>
+    <h1>Descubre los secretos que las <em>Estrellas</em> tienen para ti</h1>
+    <p class="lead">Revela tu horóscopo de la semana, guiado por las doce casas del zodiaco.</p>
+    <div class="cta"><a class="b1" href="#wheel">Ver mi horóscopo</a></div>
+    <p class="tip">Elige tu signo en la rueda: su constelación se armará en el centro. Tócala para leer tu semana.</p>
+  </div>
+  <div id="wheel"></div>
+  <p class="cap" id="cap" aria-live="polite"></p>
+</header>
+<div class="rv" id="rv" hidden role="dialog" aria-modal="true" aria-labelledby="rvt"><div class="rvc"><button class="rvx" aria-label="Cerrar">×</button><svg class="rvs" id="rvs" viewBox="0 0 100 100" aria-hidden="true"></svg><div class="casa" id="rvk"></div><h2 id="rvt"></h2><p class="d" id="rvd"></p><div class="card" id="rvb"></div></div></div>
+<script src="../js/horoscopo-data.js"></script>
+<script src="../js/horoscopo.js"></script>
+<script src="../js/app.js"></script>
+</body>
+</html>

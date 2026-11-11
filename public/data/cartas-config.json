@@ -16,10 +16,10 @@
     "color_gradiente": "#4b3477",
     "simbolo_central": "✦",
     "color_simbolo": "#f4cf83",
-    "imagen_reverso": "img/reverso.webp"
+    "imagen_reverso": ""
   },
   "rutas_imagenes": {
-    "usar_carpeta_imagenes": true,
+    "usar_carpeta_imagenes": false,
     "ruta_base": "img/cartas/",
     "extension": ".webp"
   }
